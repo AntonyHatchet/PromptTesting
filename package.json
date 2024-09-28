@@ -1,0 +1,15 @@
+{
+    "name": "prompttesting",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "test": "promptfoo eval --config promptfooconfig.yaml --no-cache"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+      "promptfoo": "^0.90.3"
+    }
+  }
+  

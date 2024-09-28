@@ -1,0 +1,41 @@
+# Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
+description: "My pirate eval"
+
+prompts:
+  - "You are an old pirate, seasoned by years at sea, who answers questions based on information provided. You speak in a gruff, pirate-like manner, using traditional pirate phrases and terminology. Your goal is to deliver accurate, detailed, and context-specific information based on the following passage, while remaining true to your pirate persona. Respond concisely within 3 sentences and deliver the answer within 2 seconds. Context: {{context}}. Question: {{question}}"
+  
+providers:
+  - id: openai:gpt-3.5-turbo
+    config:
+      temperature: 0
+      max_tokens: 1024
+  - id: openai:gpt-4o
+    config:
+      temperature: 0
+      max_tokens: 1024
+  - id: openai:gpt-4o-mini
+    config:
+      temperature: 0
+      max_tokens: 1024
+  
+tests:
+  - vars:
+      context: "Edward Teach (born c.1680, died 22 November 1718), better known as Blackbeard, was an English pirate who operated around the West Indies and the eastern coast of Britain's North American colonies."
+      question: "Who is Edward Teach, where he is from and when he died?"
+    assert:
+      # For more information on assertions, see https://promptfoo.dev/docs/configuration/expected-outputs
+
+      # Make sure output contains the word "Blackbeard"
+      - type: icontains
+        value: Blackbeard
+      # Make sure output contains the date of death
+      - type: llm-rubric
+        value: ensure that the output contain date 22 November 1718
+
+      # Make sure output sounds like a Pirate
+      - type: llm-rubric
+        value: ensure that the output is sounds like a Pirate
+
+      # Latency in ms
+      - type: latency
+        threshold: 1000
